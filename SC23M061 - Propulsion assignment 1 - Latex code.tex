@@ -1,0 +1,1146 @@
+\documentclass[]{article}
+
+%These tell TeX which packages to use.
+\usepackage{array,epsfig}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{amsxtra}
+\usepackage{amsthm}
+\usepackage{mathrsfs}
+\usepackage{color}
+\usepackage{graphicx}
+\usepackage{xcolor}
+\usepackage{subcaption}
+\usepackage{matlab-prettifier}
+\usepackage{siunitx}
+\usepackage{fancyhdr}
+\raggedbottom
+
+
+%Here I define some theorem styles and shortcut commands for symbols I use often
+\theoremstyle{definition}
+\newtheorem{defn}{Definition}
+\newtheorem{thm}{Theorem}
+\newtheorem{cor}{Corollary}
+\newtheorem*{rmk}{Remark}
+\newtheorem{lem}{Lemma}
+\newtheorem*{joke}{Joke}
+\newtheorem{ex}{Example}
+\newtheorem*{soln}{Solution}
+\newtheorem{prop}{Proposition}
+
+\newcommand{\lra}{\longrightarrow}
+\newcommand{\ra}{\rightarrow}
+\newcommand{\surj}{\twoheadrightarrow}
+\newcommand{\graph}{\mathrm{graph}}
+\newcommand{\bb}[1]{\mathbb{#1}}
+\newcommand{\Z}{\bb{Z}}
+\newcommand{\Q}{\bb{Q}}
+\newcommand{\R}{\bb{R}}
+\newcommand{\C}{\bb{C}}
+\newcommand{\N}{\bb{N}}
+\newcommand{\M}{\mathbf{M}}
+\newcommand{\m}{\mathbf{m}}
+\newcommand{\MM}{\mathscr{M}}
+\newcommand{\HH}{\mathscr{H}}
+\newcommand{\Om}{\Omega}
+\newcommand{\Ho}{\in\HH(\Om)}
+\newcommand{\bd}{\partial}
+\newcommand{\del}{\partial}
+\newcommand{\bardel}{\overline\partial}
+\newcommand{\textdf}[1]{\textbf{\textsf{#1}}\index{#1}}
+\newcommand{\img}{\mathrm{img}}
+\newcommand{\ip}[2]{\left\langle{#1},{#2}\right\rangle}
+\newcommand{\inter}[1]{\mathrm{int}{#1}}
+\newcommand{\exter}[1]{\mathrm{ext}{#1}}
+\newcommand{\cl}[1]{\mathrm{cl}{#1}}
+\newcommand{\ds}{\displaystyle}
+\newcommand{\vol}{\mathrm{vol}}
+\newcommand{\cnt}{\mathrm{ct}}
+\newcommand{\osc}{\mathrm{osc}}
+\newcommand{\LL}{\mathbf{L}}
+\newcommand{\UU}{\mathbf{U}}
+\newcommand{\support}{\mathrm{support}}
+\newcommand{\AND}{\;\wedge\;}
+\newcommand{\OR}{\;\vee\;}
+\newcommand{\Oset}{\varnothing}
+\newcommand{\st}{\ni}
+\newcommand{\wh}{\widehat}
+
+%Pagination stuff.
+\setlength{\topmargin}{-.3 in}
+\setlength{\oddsidemargin}{0in}
+\setlength{\evensidemargin}{0in}
+\setlength{\textheight}{9.in}
+\setlength{\textwidth}{6.5in}
+\pagestyle{empty}
+
+\pagestyle{fancy}
+\fancyhf{} % Clear existing header and footer
+\fancyfoot[C]{\thepage} % Centered page number at the bottom
+\renewcommand{\headrulewidth}{0pt} % Remove the horizontal line at the top
+
+
+\begin{document}
+\begin{center}
+\vspace{.4cm}
+{\bf{Aerospace Propulsion - Assignment 1}}
+\vspace{.2cm}
+\\
+{\bf Ramesh M} (SC23M061)
+\end{center}
+
+%1st Problem Starts
+\begin{enumerate}
+\item You are to pick an engine for a transport aircraft flying at Mach 0.8 at sea level on a standard day. The exit burner total temperature is 1667 K, and \( \Delta H = 41.8 \, \text{MJ/kg} \). The air mass flow rate in the core is \( 81.64 \, \text{kg/s} \). Use an ideal cycle analysis.
+\begin{enumerate}
+\item Find the dimensionless quantity, \( \frac{F}{\dot{m_t}\,a_a}\), and the dimensional quantities \( F\) and \(TSFC\) for the following engines:
+\begin{enumerate}
+\item Ramjet
+\item Turbojet (\( \pi_c = 16 \))
+\item Turbojet with afterburner (\( \pi_c = 16 \); total afterburner temperature is \(2333\, K\))
+\item Turbofan with exhausted fan (\( \pi_c = 16\), \( \pi_f = 4.0\), \( \alpha = 1\))
+\end{enumerate}
+\item Which engine will you choose and why?
+\end{enumerate}
+\emph{\textbf{Solution:}}
+\begin{enumerate}
+\item
+\begin{tabular}{|c|c|c|c|c|}
+\hline
+S.No & Engine type & TSFC $(\frac{kg}{s.N})$ & Thrust, \( F \) (N) & \( \frac{F}{\dot{m} \cdot a_a} \) \\
+\hline
+1 & Ramjet & \( 9.3724 \times 10^{-5} \) & \( 2.8105 \times 10^{4} \) & 1.0117 \\
+\hline
+2 & Turbojet & \( 3.8859 \times 10^{-5} \) & \( 6.7786 \times 10^{4} \) & 2.4402 \\
+\hline
+3 & Turbojet with afterburner & \( 4.7328 \times 10^{-5} \) & \( 9.9566 \times 10^{4} \) & 3.5842 \\
+\hline
+4 & Turbofan with exhausted fan & \( 2.2181 \times 10^{-5} \) & \( 8.4005 \times 10^{4} \) & 1.5120 \\
+\hline
+\end{tabular}
+\item
+Turbofan with exhausted fan gives comparable thrust with less TSFC. So, we can choose the Turbofan with exhausted fan for these conditions.
+\end{enumerate}
+%1st Problem ends
+
+%2nd Problem starts
+\item The effect of compression ratio on a turbojet engine with an afterburner must be analyzed for the following operating parameters:
+$ M_0 = 2.0$, $P_0 = 10\, \text{kPa}$, $T_0 = -45^\circ\, \text{C}$, $\gamma = 1.4$, $c_p = 1004\, \text{J/(kg·K)}$, $\pi_c = 12$, $\tau_\lambda = \frac{h_{t4}}{h_0} = 8$, $\Delta H = 43\, \text{mJ/(kg)}$, $\tau_\lambda, \text{AB} = \frac{h_{t7}}{h_{t0}} = 11 $. Write a computer program to study the effect of compression ratio on an afterburning turbojet engine. Plot the variation of TSFC, specific thrust, thermal, propulsive, and overall efficiency for compression pressure ratio ranging from 1 to 24. Compare the variation of the performance parameters with the ideal engine. Assume missing values if any.
+\\
+\emph{\textbf{Solution:}}
+Thermal, Propulsive and Overall efficiencies are reduced by afterburning.
+\\
+\begin{figure}[htpb]
+\includegraphics[width=0.6\textwidth]{Problem 2/TSFC.png}
+\centering
+\end{figure}
+\begin{figure}[htpb]
+\includegraphics[width=0.6\textwidth]{Problem 2/Specific thrust.png}
+\centering
+\end{figure}
+\begin{figure}[htpb]
+\includegraphics[width=0.6\textwidth]{Problem 2/Thermal eff.png}
+\centering
+\end{figure}
+\begin{figure}[htpb]
+\includegraphics[width=0.6\textwidth]{Problem 2/Propulsive eff.png}
+\centering
+\end{figure}
+\begin{figure}[htpb]
+\includegraphics[width=0.6\textwidth]{Problem 2/Overall eff.png}
+\centering
+\end{figure}
+%2nd Problem ends
+
+%3rd Problem starts
+\item 
+An ideal ramjet is to fly at an altitude of 7 km at a yet-to-be-determined Mach number. The burner exit total temperature is \SI{1778.15}{\kelvin}, and the engine will use \SI{65.7703}{\kilogram\per\second} of air. The heating value of the fuel is \SI{43015.24}{\joule\per\kilogram}. Your task is to find the Mach number at which the Thrust Specific Fuel Consumption (TSFC) is optimized, determine the optimum TSFC, calculate the thrust, and find the dimensionless thrust at this condition. To achieve this, perform a Brayton cycle analysis for the ideal ramjet, considering a specific heat ratio (\(\gamma\)) of 1.4. Vary the Mach number over the range \(0.1 < Ma < 4\) and determine the Mach number corresponding to the minimum TSFC.
+
+Write a computer code to carry out these calculations and display the results. Plot the variation of non-dimensional thrust and TSFC with Mach number.
+
+\emph{\textbf{Solution:}}
+\\
+The Mach number corresponding to the minimum TSFC is $3.4879$.
+\begin{figure}[h]
+\includegraphics[width=0.6\textwidth]{Problem 3/TSFC and NonF.png}
+\centering
+\end{figure}
+%3rd Problem ends
+
+\newpage
+%4th Problem starts
+\item 
+An ideal turbofan with the fan exhausted operates at an altitude of \SI{4572}{\meter} at
+a Mach number of 0.93. The compressor and fan pressure ratios are 17 and 2.3,
+respectively. The core airflow rate is \SI{64.86}{\kilogram\per\second}, and the bypass ratio is $a$. The
+fuel has a heating value of \SI{75002.5}{\joule\per\kilogram}, and the combustor exit total temperature
+is \SI{2800}{\kelvin}. An afterburner is added to the core, and when lit, it results in a total
+temperature of \SI{1777.78}{\kelvin} in the nozzle.
+Your task is to calculate the following parameters for both the non-afterburning and afterburning cases:
+Thrust (in Newtons), Dimensionless thrust, Thrust Specific Fuel Consumption (TSFC) in \si{\kilogram\per\newton\second}. Write a computer code to perform these calculations and display the results for both the non-afterburning and afterburning cases in SI units for $0.5 < \alpha < 1.5$.\\
+\emph{\textbf{Solution:}}
+\begin{table}[htpb]
+\centering
+\begin{subtable}{0.5\textwidth}
+\begin{tabular}{| c | c | c | c |}
+\hline
+$\alpha$ & TSFC $(kg/s.N)$ & $F$ $(N)$ & Non-Dimensional Thrust \\
+\hline
+0.50 & 0.0199 & 92746.2167 & 1.7750 \\
+\hline
+0.61 & 0.0196 & 93851.6782 & 1.7961 \\
+\hline
+0.72 & 0.0194 & 94955.8840 & 1.8173 \\
+\hline
+0.83 & 0.0192 & 96058.8211 & 1.8384 \\
+\hline
+0.94 & 0.0190 & 97160.4759 & 1.8595 \\
+\hline
+1.06 & 0.0187 & 98260.8350 & 1.8805 \\
+\hline
+1.17 & 0.0185 & 99359.8845 & 1.9015 \\
+\hline
+1.28 & 0.0183 & 100457.6104 & 1.9226 \\
+\hline
+1.39 & 0.0181 & 101553.9982 & 1.9435 \\
+\hline
+1.50 & 0.0179 & 102649.0334 & 1.9645 \\
+\hline
+\end{tabular}
+\caption{Turbojet without Afterburner}
+\end{subtable}%
+\\
+\begin{subtable}{0.5\textwidth}
+\begin{tabular}{| c | c | c | c |}
+\hline
+$\alpha$ & TSFC $(kg/s.N)$ & $F$ $(N)$ & Non-Dimensional Thrust \\
+\hline
+0.50 & 0.0153 & 77080.5231 & 3.7506 \\
+\hline
+0.61 & 0.0151 & 78548.8317 & 3.8142 \\
+\hline
+0.72 & 0.0148 & 80017.1402 & 3.8776 \\
+\hline
+0.83 & 0.0145 & 81485.4487 & 3.9411 \\
+\hline
+0.94 & 0.0143 & 82953.7573 & 4.0044 \\
+\hline
+1.06 & 0.0140 & 84422.0658 & 4.0677 \\
+\hline
+1.17 & 0.0138 & 85890.3743 & 4.1309 \\
+\hline
+1.28 & 0.0135 & 87358.6829 & 4.1941 \\
+\hline
+1.39 & 0.0133 & 88826.9914 & 4.2572 \\
+\hline
+1.50 & 0.0131 & 90295.2999 & 4.3202 \\
+\hline
+\end{tabular}
+\caption{Turbojet with Afterburner}
+\end{subtable}
+\end{table}
+\begin{figure}
+\includegraphics[width=0.6\textwidth]{Problem 4/Thrust.png}
+\includegraphics[width=0.6\textwidth]{Problem 4/Non F.png}
+\includegraphics[width=0.6\textwidth]{Problem 4/TSFC.png}
+\centering
+\end{figure}
+%4th Problem ends
+\newpage
+%5th Problem starts
+\item 
+The effect of compression ratio on a mixed turbofan engine with an afterburner is needed to be analyzed for the following operating parameters: $M_o = 2.0$, $P_o = 10\, \text{kPa}$, $T_o = -45^\circ\text{C}$, $\gamma = 1.4$, $c_p = 1004\, \text{J/kgK}$, $\pi_c = 12$, $\Delta H = 43, \text{MJ/kg}$, $\tau_\lambda = 8$,$\tau_{\lambda,AB} = 11$.
+Write a computer program to study the effect of compression ratio on an afterburning turbofan engine. Plot the three-dimensional variation of TSFC, specific thrust, thermal, propulsive, and overall efficiency for compression pressure ratios ranging from 1 to 24 and fan compression pressure ratios ranging from 1 to 4.\\
+\\
+\emph{\textbf{Solution:}}
+\begin{figure}[h]
+\includegraphics[width=0.4\textwidth]{Problem 5/TSFC.png}
+\centering
+\end{figure}
+\begin{figure}[h]
+\includegraphics[width=0.4\textwidth]{Problem 5/Efficiencies.png}
+\centering
+\end{figure}
+\begin{figure}[h]
+\includegraphics[width=0.4\textwidth]{Problem 5/Specific Thrust.png}
+\centering
+\centering
+\end{figure}
+
+%5th Problem ends
+%6th Problem starts
+\newpage
+\item
+A turboprop flies at sea level at a Mach number of 0.70. It ingests 13.61 kg/s of air.
+The fuel has a heating value of 43,960 kJ/kg, and the burner total temperature
+is 1389 K. The work coefficient for the propeller is 1.0079. Write a computer program to study the effect of compression ratio on a turboprop engine. Plot the variation of TSFC, specific thrust, thermal, propulsive, and overall efficiency for a compression pressure ratio range from 1 to 24.\\
+\\
+\emph{\textbf{Solution:}}
+\begin{figure}[h]
+\includegraphics[width=0.6\textwidth]{Problem 6/Problem_6_TSFC.png}
+\includegraphics[width=0.6\textwidth]{Problem 6/Efficiencies.png}
+\centering
+\end{figure}
+\end{enumerate}
+\newpage
+\begin{center}
+{\bf Matlab codes for the problems}
+\end{center}
+\begin{lstlisting}[style=Matlab-editor]
+%Problem 1
+
+% Input parameters %
+
+M_a = 0.8; %Inlet Mach
+T_o4 = 1667; %exit burner temperature (K)
+delH = 41.8 * 10^6;%Heating value of the fuel (j/kg)
+mdotc = 81.64; %core mass flow rate (kg/s)
+P_atm = 101325; %Atmospeheric pressure (Pa)
+T_atm = 288.15; %Atmospheric temperature (K)
+gamma = 1.4;
+R = 287; %gas constant for air (j/kg.K)
+cp = 1005; %Specific heat (j/kg.K)
+
+% 1) Ramjet
+
+a_a = sqrt(gamma * R * T_atm); % Speed of sound (m/s)
+u_a = M_a * a_a; % Ramjet velocity (m/s)
+T_oa = T_atm * (1 + ((gamma - 1)/2)*(M_a)^2); % Total temperature at atm (K)
+P_oa = P_atm * ((1 + ((gamma - 1)/2)*(M_a)^2))^(gamma/(gamma - 1)); % Total pressure at atm (Pa)
+P_o4 = P_oa;
+P_o3 = P_oa;
+P_o8 = P_oa;
+mdotf = ((mdotc * cp) * (T_o4 - T_oa))/(delH); %fuel mass flow rate (kg/s)
+f = mdotf/mdotc; %fuel-air ratio
+T_o8 = T_o4;
+P_8 = P_atm;
+M_8 = sqrt((2/(gamma-1))*((P_o8/P_8)^((gamma-1)/(gamma)) - 1)); %exit mach
+S = 'K';
+T_8 = T_o8/(1 + (((gamma-1)/2) * (M_8)^2)); %(K)
+%fprintf('T_8 = %f K\n', T_8)
+a_8 = sqrt(gamma * R * T_8); %(m/s)
+u_8 = M_8 * a_8; %(m/s)
+F = mdotc * (u_8 - u_a) %Thrust (N)
+TSFC = mdotf/F %(kg/s.N)
+tow_B = (u_8/u_a)^2;
+nonF = M_a * (sqrt(tow_B) - 1) %Non-dimensional thrust
+
+% 2) Turbojet without afterburner pi_c = 16
+
+
+a_a = sqrt(gamma * R * T_atm); % Speed of sound (m/s)
+u_a = M_a * a_a; % Ramjet velocity (m/s)
+T_oa = T_atm * (1 + ((gamma - 1)/2)*(M_a)^2); % Total temperature at atm (K)
+P_oa = P_atm * ((1 + ((gamma - 1)/2)*(M_a)^2))^(gamma/(gamma - 1)); % Total pressure at atm (Pa)
+row_a = P_atm/(R * T_atm); % Density (kg/m^3)
+A_in = mdotc/(row_a * u_a); % Diffuser inlet area (m^2)
+%Compressor
+P_o2 = P_oa;
+P_o3 = (pi_c)*(P_o2);
+tow_c = (pi_c)^((gamma - 1)/(gamma));
+T_o2 = T_oa;
+T_o3 = (T_o2) * (tow_c);
+%Burner
+P_o4 = P_o3;
+mdotf = ((mdotc * cp) * (T_o4 - T_o3))/(delH); %fuel mass flow rate (kg/s)
+%Turbine
+T_o5 = T_o4 - (T_o3 - T_o2);
+T_o8 = T_o5;
+P_o5 = P_o4 * (T_o5/T_o4)^(gamma/(gamma-1));
+%Nozzle
+P_o8 = P_o5;
+P_8 = P_atm;
+M_8 = sqrt((2/(gamma-1))*((P_o8/P_8)^((gamma-1)/(gamma)) - 1)); %exit mach
+T_8 = T_o8/(1 + (((gamma-1)/2) * (M_8)^2)); %(K)
+a_8 = sqrt(gamma * R * T_8); %(m/s)
+u_8 = M_8 * a_8; %(m/s)
+row_8 = P_8/(R * T_8);
+A_8 = mdotc / (row_8 * u_8);
+%Thrust and TSFC
+F = mdotc * (u_8 - u_a) %Thrust (N)
+TSFC = mdotf/F %(kg/s.N)
+%Non-Dimensional Thrust
+nonF = F/(a_a * mdotc)
+
+% 3) Turbojet with afterburner
+
+T_o6 = 2333; %Total afterburner temperature
+
+a_a = sqrt(gamma * R * T_atm); % Speed of sound (m/s)
+u_a = M_a * a_a; % Ramjet velocity (m/s)
+T_oa = T_atm * (1 + ((gamma - 1)/2)*(M_a)^2); % Total temperature at atm (K)
+P_oa = P_atm * ((1 + ((gamma - 1)/2)*(M_a)^2))^(gamma/(gamma - 1)); % Total pressure at atm (Pa)
+row_a = P_atm/(R * T_atm); % Density (kg/m^3)
+A_in = mdotc/(row_a * u_a); % Diffuser inlet area (m^2)
+
+%Compressor
+P_o2 = P_oa;
+P_o3 = (pi_c)*(P_o2);
+tow_c = (pi_c)^((gamma - 1)/(gamma));
+T_o2 = T_oa;
+T_o3 = (T_o2) * (tow_c);
+
+%Burner
+P_o4 = P_o3;
+mdotf = ((mdotc * cp) * (T_o4 - T_o3))/(delH); %fuel mass flow rate (kg/s)
+
+%Turbine
+T_o5 = T_o4 - (T_o3 - T_o2);
+T_o8 = T_o6;
+P_o5 = P_o4 * (T_o5/T_o4)^(gamma/(gamma-1));
+
+%Afterburner
+
+mdotfab = ((mdotc * cp) * (T_o6 - T_o5))/(delH); %Afterburner mass flow rate (kg/s)
+mdot_ft = mdotf + mdotfab;
+
+%Nozzle
+P_o8 = P_o5;
+P_8 = P_atm;
+M_8 = sqrt((2/(gamma-1))*((P_o8/P_8)^((gamma-1)/(gamma)) - 1)); %exit mach
+T_8 = T_o8/(1 + (((gamma-1)/2) * (M_8)^2)); %(K)
+
+a_8 = sqrt(gamma * R * T_8); %(m/s)
+u_8 = M_8 * a_8; %(m/s)
+
+row_8 = P_8/(R * T_8);
+A_8 = mdotc / (row_8 * u_8);
+
+%Thrust and TSFC
+F = mdotc * (u_8 - u_a) %Thrust (N)
+TSFC = mdot_ft/F %(kg/s.N)
+
+%Percentage increase in thrust compared to turbojet without afterburner
+percent_increase = (((1.1809e+05) - (8.1473e+04))/(8.1473e+04))*100
+
+%Non-Dimensional Thrust
+nonF = F/(a_a * mdotc)
+
+% 4) Turbofan with exhausted fan no Afterburner
+
+%Diffuser
+a_a = sqrt(gamma * R * T_atm); % Speed of sound (m/s)
+u_a = M_a * a_a; % Ramjet velocity (m/s)
+T_oa = T_atm * (1 + ((gamma - 1)/2)*(M_a)^2); % Total temperature at atm (K)
+P_oa = P_atm * ((1 + ((gamma - 1)/2)*(M_a)^2))^(gamma/(gamma - 1)); % Total pressure at atm (Pa)
+row_a = P_atm/(R * T_atm); % Density (kg/m^3)
+A_in = (mdotc * (1 + alpha))/(row_a * u_a); % Diffuser inlet area (m^2)
+
+%Fan
+P_o2 = P_oa;
+P_o7 = (pi_f)*(P_o2);
+T_o2 = T_oa;
+T_o7 = (T_o2)*((pi_f)^((gamma-1)/gamma));
+
+%Fan nozzle
+P_9 = P_atm;
+P_o9 = P_o7;
+
+M_9 = sqrt((2/(gamma-1))*(((P_o9/P_9)^((gamma-1)/gamma)) - 1));
+
+%M_9 = sqrt((2/(gamma-1))*((P_o9/P_9)^((gamma-1)/(gamma)) - 1)) %exit mach
+T_o9 = T_o7;
+T_9 = T_o9/(1 + (((gamma-1)/2) * (M_9)^2)); %(K)
+a_9 = sqrt(gamma * R * T_9);
+u_9 = M_9 * a_9;
+
+%Compressor
+P_o3 = (pi_c) * P_o2;
+tow_c = (pi_c)^((gamma-1)/gamma);
+T_o3 = T_o2 * tow_c;
+
+%Burner
+mdotf = ((mdotc * cp)*(T_o4 - T_o3))/(delH);
+f = mdotf/mdotc;
+
+%Turbine
+T_o5 = T_o4 - (T_o3 - T_o2) - ((alpha) * (T_o7 - T_o2));
+P_o4 = P_o3;
+tow_t = (T_o5)/(T_o4);
+tow_f = (T_o7)/(T_o2);
+P_o5 = (P_o4) * ((tow_t)^((gamma)/(gamma-1)));
+
+%Primary nozzle
+P_8 = P_atm;
+P_o8 = P_o5;
+M_8 = sqrt((2/(gamma-1))*((P_o8/P_8)^((gamma-1)/(gamma)) - 1)); %exit mach
+T_o8 = T_o5;
+T_8 = T_o8/(1 + (((gamma-1)/2) * (M_8)^2)); %(K)
+a_8 = sqrt(gamma * R * T_8);
+u_8 = M_8 * a_8;
+
+
+%Thrust and TSFC
+F = ((mdotc) * (u_8 - u_a)) + ((alpha * mdotc) * (u_9 - u_a))
+TSFC = mdotf/F
+
+
+
+%Non-Dimensional Thrust
+nonF = F/(a_a * mdotc * (1+alpha))
+
+%Problem 2
+%To find
+%TSFC
+%Specific thrust
+%Thermal efficiency
+%Propulsive efficiency
+%Overall efficiency
+%pi_c = 1 to 24
+%Turbojet with afterburner
+%Input parameters with afterburner
+
+M_o = 2.0;
+P_o = 10000; %Static pressure(Pa)
+T_o = 228.15; %Static temperature(K)
+R = 287;
+gamma = 1.4;
+cp = 1004; %(J/kg.K)
+%pi_c (P_o3/P_o2) (To vary from 1 to 24)
+T_oa = T_o * (1 + ((gamma-1)/2)*(M_o)^2);
+tow_lambda = 8; %((Cpt * T_o4)/(Cpc * T_o))
+delH = 43 * 10^6; %Heating value (J/kg)
+tow_lambda_AB = 11; %Temperature ratio of afterburner (T_o7/T_o)
+a_o = sqrt(gamma * R * T_o);
+V_o = M_o * a_o;
+T_t4 = (tow_lambda)*T_o; %Burner exit temperature
+T_t7 = (tow_lambda_AB)*(T_o); %Total temperature at exit of afterburner
+P_to = P_o*((1+((gamma-1)/2)*(M_o)^2)^((gamma)/(gamma-1)));
+T_to = T_o*(1+((gamma-1)/2)*(M_o)^2);
+T_t2 = T_to;
+P_t2 = P_to;
+tow_r = 1 + (((gamma-1)/2)*(M_o)^2);
+y = 1;
+
+for pi_c = (1:24)
+P_t3(1,y) = P_t2 * pi_c;
+tow_c(1,y) = (pi_c)^((gamma-1)/gamma); %Compressor temperature ratio
+T_t3 = T_t2 .* tow_c;
+P_t4 = P_t3;
+f = (cp .* (T_t4 - T_t3))./(delH - (cp * T_t4));
+T_t5 = T_t4 - ((T_t3 - T_t2)/(1+f));
+pi_t = (T_t5/T_t4)^((gamma)/(gamma-1));
+P_t5 = P_t4 * pi_t;
+P_t7 = P_t5;
+f_ab = ((1+f)*((cp * T_t7)-(cp * T_t5)))/((delH - (cp * T_t7)));
+P_t9 = P_t7;
+T_t9 = T_t7;
+P_9 = P_o;
+M_9 = sqrt((2/(gamma-1))*(((P_t9/P_9).^((gamma-1)/(gamma))) - 1));
+T_9 = T_t9./(1 + ((gamma-1)/2)*((M_9).^2));
+a_9 = sqrt(gamma * R * T_9);
+V_9 = M_9.*a_9;
+specific_thrust = ((1+f+f_ab).*V_9) - V_o;
+non_specific_thrust = ((1+f+f_ab).*(V_9/a_o)) - M_o;
+TSFC = (f+f_ab)./(specific_thrust);
+A = ((1+f+f_ab).*((V_9).^2)/2) - ((V_o).^2/2);
+B = (f + f_ab).* delH;
+Thermal_eff = (A./B);
+Propulsive_eff = ((specific_thrust * V_o)./A);
+Overall_eff = Thermal_eff .* Propulsive_eff;
+y = y+1;
+end
+
+x = (1:24);
+non_specific_thrust;
+TSFC;
+Thermal_eff;
+Propulsive_eff;
+Overall_eff;
+
+%Problem 2
+%To find
+%TSFC
+%Specific thrust
+%Thermal efficiency
+%Propulsive efficiency
+%Overall efficiency
+%pi_c = 1 to 24
+
+%Input parameters
+%Turbojet without afterburner
+
+M_o = 2.0;
+P_o = 10000; %Static pressure(Pa)
+T_o = 228.15; %Static temperature(K)
+R = 287;
+gamma = 1.4;
+cp = 1004; %(J/kg.K)
+%pi_c (P_o3/P_o2) (To vary from 1 to 24)
+T_oa = T_o * (1 + ((gamma-1)/2)*(M_o)^2);
+tow_lambda = 8; %((Cpt * T_o4)/(Cpc * T_o))
+delH = 43 * 10^6; %Heating value (J/kg)
+tow_lambda_AB = 11; %Temperature ratio of afterburner (T_o7/T_o)
+a_o = sqrt(gamma * R * T_o);
+V_o = M_o * a_o;
+T_t4 = (tow_lambda)*T_o; %Burner exit temperature
+T_t7 = (tow_lambda_AB)*(T_oa); %Total temperature at exit of afterburner
+P_to = P_o*((1+((gamma-1)/2)*(M_o)^2)^((gamma)/(gamma-1)));
+T_to = T_o*(1+((gamma-1)/2)*(M_o)^2);
+T_t2 = T_to;
+P_t2 = P_to;
+tow_r = 1 + (((gamma-1)/2)*(M_o)^2);
+y = 1;
+
+for pi_c = (1:24)
+P_t3(1,y) = P_t2 * pi_c;
+tow_c(1,y) = (pi_c)^((gamma-1)/gamma); %Compressor temperature ratio
+T_t3 = T_t2 .* tow_c;
+P_t4 = P_t3;
+f = (cp .* (T_t4 - T_t3))./(delH - (cp * T_t4));
+T_t5 = T_t4 - ((T_t3 - T_t2)/(1+f));
+pi_t = (T_t5/T_t4)^((gamma)/(gamma-1));
+P_t5 = P_t4 * pi_t;
+%P_t7 = P_t5;
+%f_ab = ((1+f)*((cp * T_t7)-(cp * T_t5)))/((delH - (cp * T_t7)));
+P_t9 = P_t5;
+T_t9 = T_t5;
+P_9 = P_o;
+M_9 = sqrt((2/(gamma-1))*(((P_t9/P_9).^((gamma-1)/(gamma))) - 1));
+T_9 = T_t9./(1 + ((gamma-1)/2)*((M_9).^2));
+a_9 = sqrt(gamma * R * T_9);
+V_9 = M_9.*a_9;
+specific_thrust_i = ((1+f).*V_9) - V_o;
+non_specific_thrust_i = ((1+f).*(V_9/a_o)) - M_o;
+TSFC_i = (f)./(specific_thrust_i);
+A = ((1+f).*((V_9).^2)/2) - ((V_o).^2/2);
+B = (f).* delH;
+Thermal_eff_i = (A./B);
+%Propulsive_eff_i = ((specific_thrust_i * V_o)./A);
+%Thermal_eff_i = 1 - (T_o./T_t3);
+Propulsive_eff_i = 2./(1 + (V_9/V_o));
+Overall_eff_i = Thermal_eff_i .* Propulsive_eff_i;
+y = y+1;
+end
+
+x = (1:24);
+specific_thrust_i;
+TSFC_i;
+Thermal_eff_i;
+Propulsive_eff_i;
+Overall_eff_i;
+
+plot(x,TSFC,'LineWidth',2)
+hold on 
+plot(x,TSFC_i,'LineWidth',2)
+xlabel('Compression pressure ratio');
+ylabel('TSFC (kg/sN)');
+title('TSFC vs. Compression pressure ratio');
+legend('Turbojet with afterburner','Turbojet without afterburner')
+grid on
+hold off
+
+plot(x,specific_thrust,'LineWidth',2)
+hold on 
+plot(x,specific_thrust_i,'LineWidth',2)
+xlabel('Compression pressure ratio');
+ylabel('Specific thrust');
+title('Specific thrust vs. Compression pressure ratio');
+legend('Turbojet with afterburner','Turbojet without afterburner');
+grid on
+hold off
+
+plot(x,Thermal_eff,'LineWidth',2)
+hold on 
+plot(x,Thermal_eff_i,'LineWidth',2)
+xlabel('Compression pressure ratio');
+ylabel('Thermal efficiency');
+title('Thermal efficiency vs. Compression pressure ratio');
+legend('Turbojet with afterburner','Turbojet without afterburner')
+grid on
+hold off
+
+plot(x,Propulsive_eff,'LineWidth',2)
+hold on 
+plot(x,Propulsive_eff_i,'LineWidth',2)
+xlabel('Compression pressure ratio');
+ylabel('Propulsive efficiency');
+title('Propulsive efficiency vs. Compression pressure ratio');
+legend('Turbojet with afterburner','Turbojet without afterburner')
+grid on
+hold off
+
+plot(x,Overall_eff,'LineWidth',2)
+hold on 
+plot(x,Overall_eff_i,'LineWidth',2)
+xlabel('Compression pressure ratio');
+ylabel('Overall efficiency');
+title('Overall efficiency vs. Compression pressure ratio');
+legend('Turbojet with afterburner','Turbojet without afterburner')
+grid on
+hold off
+
+%Problem 3
+
+M_a = linspace(0.1,4,100); %Mach number range - To find
+T_o4 = 1778.15; %exit burner temperature (K)
+delH = 43015.24; %Heating value of the fuel (j/kg)
+mdotc = 65.7703; %core mass flow rate (kg/s)
+P_atm = 4.11 * 10^4; %Atmospeheric pressure (Pa)
+T_atm = 242.65; %Atmospheric temperature (K)
+gamma = 1.4;
+R = 287; %gas constant for air (j/kg.K)
+cp = 1005; %Specific heat (j/kg.K)
+a_a = sqrt(gamma * R * T_atm);% Speed of sound (m/s)
+y = 1;
+for x = linspace(0.1,4,100)
+    u_a(1,y) = x.*a_a;
+    T_oa(1,y) = T_atm * (1 + ((gamma - 1)/2)*(x).^2);
+    T_o3 = T_oa;
+    P_oa(1,y) = P_atm * ((1 + ((gamma - 1)/2).*(x).^2)).^(gamma/(gamma - 1)); % Total pressure at atm (Pa)
+    P_o4 = P_oa;
+    P_o3 = P_oa;
+    P_o8 = P_oa;
+    mdotf = ((mdotc * cp) * (T_o4 - T_oa))/(delH);
+    f = mdotf/mdotc;
+    T_o8 = T_o4;
+    P_8 = P_atm;
+    M_8 = sqrt((2/(gamma-1))*((P_o8/P_8).^((gamma-1)/(gamma)) - 1)); %exit mach
+    T_8 = T_o8./(1 + (((gamma-1)/2) * (M_8).^2)); %(K)
+    a_8 = sqrt(gamma * R .* T_8);
+    u_8 = M_8 .* a_8;%(m/s)
+    F = mdotc .* (u_8 - u_a);%Thrust (N)
+    TSFC = mdotf./F; %(kg/s.N)
+    tow_B = (u_8./u_a).^2;
+    nonF = F./(mdotc * a_a); %Non-dimensional thrust
+    y = y+1;
+end
+
+[min_tsfc, min_tsfc_index] = min(TSFC);
+optimal_mach = M_a(min_tsfc_index)
+TSFC;
+nonF;
+
+yyaxis left;
+plot(M_a, TSFC, 'b','LineWidth', 2);
+xlabel('Mach Number');
+ylabel('TSFC (kg/sN)');
+title('Non-Dimensional Thrust and TSFC vs. Mach Number');
+
+yyaxis right;
+plot(M_a,nonF, 'r','LineWidth', 2);
+ylabel('Non-Dimensional Thrust');
+grid on
+legend('TSFC', 'Non-Dimensional Thrust');
+
+%Problem 4
+%ToFind
+%Thrust
+%Dimensionless Thrust
+%TSFC
+
+%Turbofan without afterburner
+
+% Input parameters
+
+%Sea level conditions
+T_sea = 288.16;
+P_sea = 101325;
+row_sea = 1.225;
+H = 4572; %Given altitude
+g = 9.81;
+R = 287;
+a = -0.0065;
+H1 = 0;
+cp = 1005;
+T_a = T_sea + (a * (H - H1));
+P_a = P_sea * ((T_a/T_sea)^(-g/(a*R)));
+row_a = row_sea * ((T_a/T_sea)^(-(g/(a*R))-1));
+
+%Given parameters
+M_a = 0.93;
+pi_c = 17;
+pi_f = 2.3;
+mdotc = 64.86;
+%alpha = 0.5; %Varies from 0.5 to 1.5
+delH = 75002.5;
+T_o4 = 2800; %Combustor exit total temperature
+gamma = 1.4;
+y = 1;
+for alpha = linspace(0.5,1.5,10)
+%Diffuser
+a_a = sqrt(gamma * R * T_a); % Speed of sound (m/s)
+u_a = M_a * a_a; % Ramjet velocity (m/s)
+T_oa = T_a * (1 + ((gamma - 1)/2)*(M_a)^2); % Total temperature at atm (K)
+P_oa = P_a * ((1 + ((gamma - 1)/2)*(M_a)^2))^(gamma/(gamma - 1)); % Total pressure at atm (Pa)
+row_a = P_a/(R * T_a); % Density (kg/m^3)
+%A_in = (mdotc * (1 + alpha))/(row_a * u_a) % Diffuser inlet area (m^2)
+P_o2 = P_oa;
+T_o2 = T_oa;
+P_o3 = (pi_c) * P_o2;
+P_o4 = P_o3;
+%Fan
+P_o7 = (pi_f) * (P_o2);
+T_o7 = T_o2 * (pi_f)^((gamma-1)/gamma);
+%Fan nozzle
+P_9 = P_a;
+P_o9 = P_o7;
+M_9 = sqrt((2/(gamma-1))*((P_o9/P_9)^((gamma-1)/(gamma)) - 1)); %exit mach of fan nozzle
+T_o9 = T_o7;
+T_9 = T_o9/(1 + (((gamma-1)/2) * (M_9)^2)); %(K)
+a_9 = sqrt(gamma * R * T_9);
+u_9 = M_9 * a_9;
+%Turbine
+tow_c = (pi_c)^((gamma - 1)/(gamma));
+T_o3 = (T_o2) * (tow_c);
+T_o5 = T_o4 - (T_o3 - T_o2) - ((alpha) .* (T_o7 - T_o2));
+tow_t = (T_o5)/(T_o4);
+tow_f = (T_o7)/(T_o2);
+P_o5 = (P_o4) * ((tow_t)^((gamma)/(gamma-1)));
+%Primary nozzle
+P_8 = P_a;
+P_o8 = P_o5;
+M_8 = sqrt((2/(gamma-1))*((P_o8/P_8)^((gamma-1)/(gamma)) - 1)); %exit mach of nozzle
+T_o8 = T_o5;
+T_8 = T_o8/(1 + (((gamma-1)/2) * (M_8)^2)); %(K)
+a_8 = sqrt(gamma * R * T_8);
+u_8 = M_8 * a_8;
+%Thrust and TSFC
+F(1,y) = ((mdotc) * (u_8 - u_a)) + ((alpha .* mdotc) * (u_9 - u_a));
+mdotf = ((mdotc * cp) * (T_o4 - T_o3))/(delH); %fuel mass flow rate (kg/s)
+TSFC = mdotf./F;
+%Non-Dimensional Thrust
+nonF = F/(a_a * mdotc * (1+alpha));
+y = y+1;
+end
+
+x = linspace(0.5,1.5,10);
+F;
+TSFC;
+nonF;
+Table_wab = table([x; TSFC; F; nonF])
+writetable(Table_wab, 'table_withoutab.csv', 'Delimiter',',')
+
+plot(x,TSFC,'LineWidth',2);
+xlabel('Bypass ratio');
+ylabel('TSFC (kg/sN)');
+title('TSFC vs. Bypass ratio');
+grid on
+plot(x,nonF,'LineWidth',2);
+xlabel('Bypass ratio');
+ylabel('Non-Dimensional Thrust');
+title('Non-Dimensional Thrust and TSFC vs. Bypass ratio');
+grid on
+plot(x,F,'LineWidth',2);
+xlabel('Bypass ratio');
+ylabel('Thrust (N)');
+title('Thrust vs. Bypass ratio');
+grid on
+
+
+%Turbofan with afterburner
+
+% Input parameters
+
+%Sea level conditions
+T_sea = 288.16;
+P_sea = 101325;
+row_sea = 1.225;
+H = 4572; %Given altitude
+g = 9.81;
+R = 287;
+a = -0.0065;
+H1 = 0;
+cp = 1005;
+T_a = T_sea + (a * (H - H1));
+P_a = P_sea * ((T_a/T_sea)^(-g/(a*R)));
+row_a = row_sea * ((T_a/T_sea)^(-(g/(a*R))-1));
+
+%Given parameters
+M_a = 0.93;
+pi_c = 17;
+pi_f = 2.3;
+mdotc = 64.86;
+%alpha = 0.5; %Varies from 0.5 to 1.5
+delH = 75002.5;
+T_o4 = 2800; %Combustor exit total temperature
+gamma = 1.4;
+T_o6 = 1777.78; %A/B exit total temperature
+y = 1;
+for alpha = linspace(0.5,1.5,10)
+%Diffuser
+a_a = sqrt(gamma * R * T_a); % Speed of sound (m/s)
+u_a = M_a * a_a; % Ramjet velocity (m/s)
+T_oa = T_a * (1 + ((gamma - 1)/2)*(M_a)^2); % Total temperature at atm (K)
+P_oa = P_a * ((1 + ((gamma - 1)/2)*(M_a)^2))^(gamma/(gamma - 1)); % Total pressure at atm (Pa)
+row_a = P_a/(R * T_a); % Density (kg/m^3)
+%A_in = (mdotc * (1 + alpha))/(row_a * u_a) % Diffuser inlet area (m^2)
+P_o2 = P_oa;
+T_o2 = T_oa;
+P_o3 = (pi_c) * P_o2;
+P_o4 = P_o3;
+%Fan
+P_o7 = (pi_f) * (P_o2);
+T_o7 = T_o2 * (pi_f)^((gamma-1)/gamma);
+%Fan nozzle
+P_9 = P_a;
+P_o9 = P_o7;
+M_9 = sqrt((2/(gamma-1))*((P_o9/P_9)^((gamma-1)/(gamma)) - 1)); %exit mach of fan nozzle
+T_o9 = T_o7;
+T_9 = T_o9/(1 + (((gamma-1)/2) * (M_9)^2)); %(K)
+a_9 = sqrt(gamma * R * T_9);
+u_9 = M_9 * a_9;
+%Turbine
+tow_c = (pi_c)^((gamma - 1)/(gamma));
+T_o3 = (T_o2) * (tow_c);
+T_o5 = T_o4 - (T_o3 - T_o2) - ((alpha) .* (T_o7 - T_o2));
+tow_t = (T_o5)/(T_o4);
+tow_f = (T_o7)/(T_o2);
+P_o5 = (P_o4) * ((tow_t)^((gamma)/(gamma-1)));
+%Afterburner
+mdotf = ((mdotc * cp) * (T_o4 - T_o3))/(delH); %fuel mass flow rate (kg/s)
+mdotfab = ((mdotc * cp) * (T_o6 - T_o5))/(delH); %A/B fuel mass flow rate (kg/s)
+mdotft = ((mdotc * cp * T_a)/(delH))*((T_o6/T_oa) + (alpha * tow_f) - (1 + alpha));
+%Nozzle
+T_o8 = T_o6;
+T_8 = (T_o8)./(1 + ((gamma-1)/2)*(M_8).^2);
+a_8 = sqrt(gamma * R * T_8);
+u_8 = M_8 .* a_8;
+u8byu6 = sqrt((T_o6/T_a)*(1 - (1/((T_oa/T_a)*tow_c*tow_t)))/((T_oa/T_a)-1));
+%Thrust
+mdots = alpha * mdotc;
+F_ab(1,y) = ((mdotc * u_a)*((u_8/u_a)-1)) + ((mdots * u_a)*((u_9/u_a)-1));
+TSFC_ab = mdotft./F_ab;
+A = (T_o6/T_a)/((T_oa/T_a) - 1);
+B = ((T_oa/T_a)*(tow_c))*(1 - (((T_oa/T_a) * (T_a/T_o4))*(((tow_c)-1) + ((alpha) * (tow_f - 1)))));
+C = sqrt((((T_oa/T_a)*(tow_f)) - 1)/((T_oa/T_a) - 1)) - 1;
+nonThrust_ab(1,y) = (M_a * (sqrt(A * (1 - (1/B))) - 1)) + ((alpha * M_a) * C);
+y = y+1;
+end
+nonThrust_ab
+
+plot(x,TSFC,'LineWidth',2);
+hold on
+plot(x,TSFC_ab,'LineWidth',2);
+xlabel('Bypass ratio');
+ylabel('TSFC (kg/sN)');
+title('TSFC vs. Bypass ratio');
+grid on
+legend('TSFC without afterburnet','TSFC with afterburner')
+hold off
+
+plot(x,nonF,'LineWidth',2);
+hold on
+plot(x,nonThrust_ab,'LineWidth',2);
+xlabel('Bypass ratio');
+ylabel('Non-Dimensional Thrust');
+title('Non-Dimensional Thrust and TSFC vs. Bypass ratio');
+grid on
+legend('Non-Dimensional Thrust without afterburnet','Non-Dimensional Thrust with afterburner')
+hold off
+
+plot(x,F,'LineWidth',2);
+hold on
+plot(x,F_ab,'LineWidth',2);
+xlabel('Bypass ratio');
+ylabel('Thrust (N)');
+title('Thrust vs. Bypass ratio');
+grid on
+hold off
+legend('Thrust without afterburnet','Thrust with afterburner')
+
+%Problem 5
+%Mixed Turbofan with afterburner
+
+%Input parameters
+M_a = 2.0;
+P_a = 10000; %Static pressure(Pa)
+T_a = 228.15; %Static temperature(K)
+R = 287;
+gamma = 1.4;
+cp = 1004; %(J/kg.K)
+%pi_c = 12; %(P_o3/P_o2) (To vary from 1 to 24)
+%pi_f (P_o13/P_o2) To vary from 1 to 4
+tow_lambda = 8; %((Cpt * T_o4)/(Cpc * T_a))
+delH = 43 * 10^6; %Heating value (J/kg)
+tow_lambda_AB = 11; %Temperature ratio of afterburner (T_o6/T_a)
+P_oa = P_a * (1 + ((gamma-1)/2)*((M_a)^2))^((gamma)/(gamma-1));
+T_oa = T_a * (1 + ((gamma-1)/2)*((M_a)^2));
+pi_r = P_oa/P_a;
+a_a = sqrt(gamma * R * T_a);
+u_a = a_a * M_a;
+%T_o4 = (tow_lambda)*T_a; %Burner exit temperature
+%T_o6 = (tow_lambda_AB)*(T_oa); %Total temperature at exit of afterburner
+alpha = 1.2;
+pi_c = (1:1:24);
+pi_f = (1:1:4);
+mdotc = 74; %primary flow rate kg/s
+
+for i = 1:1:4
+    for j = 1:1:24
+        %Fan
+        P_o2(i,j) = pi_f(i)*P_oa;
+        T_o2(i,j) = T_oa*((pi_f(i))^((gamma-1)/(gamma)));
+        tow_f(i,j) = T_o2(i,j)/T_oa;
+        %Compressor
+        P_o3(i,j) = pi_c(j)*P_o2(i,j);
+        T_o3(i,j) = T_o2(i,j)*(pi_c(j))^((gamma-1)/(gamma));
+        %Burner
+        P_o4(i,j) = P_o3(i,j);
+        T_o4(i,j) = 8 * T_oa;
+        tow_b(i,j) = T_o4(i,j)/T_o3(i,j);
+        %Turbine
+        T_o5(i,j) = T_o4(i,j) + T_o2(i,j) - T_o3(i,j) - alpha*(T_o2(i,j)-T_oa);
+        P_o5(i,j) = P_o4(i,j) * (T_o5(i,j)/T_o4(i,j))^(gamma/(gamma-1));
+        %Bypass Duct
+        T_o7(i,j) = T_o2(i,j);
+        P_o7(i,j) = P_o2(i,j);
+        %Mixer
+        T_o55(i,j) = T_oa*tow_f(i,j)*((alpha+tow_b(i,j)/(alpha+1)));
+        P_o55(i,j) = P_o5(i,j);
+        %Afterburner
+        T_o6(i,j) = 11 * T_a;
+        P_o6(i,j) = P_o55(i,j);
+        %Nozzle
+        M_8(i,j) = sqrt((2/(gamma-1))*(((P_o55(i,j)/P_a)^((gamma-1)/gamma))-1));
+        T_8(i,j) = T_o6(i,j)/(1 + ((gamma-1)/2)*M_8(i,j)^2);
+        u_8(i,j) = M_8(i,j)*sqrt(gamma*R*T_8(i,j));
+        %Specific_thrust
+        Specific_thrust(i,j) = (1+alpha)*(u_8(i,j) - u_a);
+        %TSFC
+        mdotf(i,j) = (mdotc * cp *(T_o4(i,j) - T_o3(i,j)))/(delH);
+        mdotf_ab(i,j) = (1+alpha)*mdotc*cp*(T_o4(i,j) - T_o3(i,j))/(delH);
+        mdot_tot(i,j) = mdotf(i,j) + mdotf_ab(i,j);
+        TSFC = mdot_tot/(Specific_thrust(i,j) * mdotc);
+        %Thermal efficiency
+        Thermal_eff(i,j) = (Specific_thrust(i,j)*mdotc*u_a)/(mdot_tot(i,j)*delH);
+        %Propulsive efficiency
+        Prop_eff(i,j) = 2*u_a/(u_a + u_8(i,j));
+        %Overall efficiency
+        Overall_eff(i,j) = Thermal_eff(i,j)*Prop_eff(i,j);
+    end
+end
+
+surf(TSFC)
+xlabel('\pi_c')
+ylabel('\pi_f')
+zlabel('TSFC')
+grid on
+
+surf(Specific_thrust)
+xlabel('\pi_c')
+ylabel('\pi_f')
+zlabel('Specific thrust')
+grid on
+
+
+surf(pi_c,pi_f, Prop_eff)
+hold on
+surf(pi_c,pi_f, Thermal_eff)
+hold on
+surf(pi_c,pi_f, Overall_eff)
+xlabel('\pi_c')
+ylabel('\pi_f')
+zlabel('Efficiency')
+%zlabel('propulsive efficiency')
+grid on
+
+% Problem 6
+% Turbo Prop
+% To find
+% TSFC
+% Specific thrust
+% Thermal eff
+% Propulsive eff
+% Overall eff
+% Compression pressure ratio - 1 to 24
+
+% Given values
+M_a = 0.70;
+mdotc = 13.61;
+delH = 43960000;
+T_o4 = 1389;
+C_w_p = 1.0079; % Work coefficient
+P_a = 101325;
+P_8 = 101325;
+T_a = 288.15;
+gamma = 1.4;
+R = 287;
+cp = 1005;
+pi_c = linspace(1,24,100);
+y = 1;
+
+for i = 1:length(pi_c)
+    %Diffuser
+    u_a = M_a * sqrt(gamma * R * T_a);
+    T_oa = T_a * (1 + ((gamma-1)/2)*M_a^2);
+    T_o2 = T_oa;
+    P_oa = P_a * (1 + ((gamma-1)/2)*M_a^2)^(gamma/(gamma-1));
+    %Compressor
+    P_o2 = P_oa;
+    P_o3(1,y) = (pi_c(i)) * (P_o2);
+    tow_c = (pi_c(i))^((gamma-1)/gamma);
+    T_o3(1,y) = tow_c * T_o2;
+    %Burner
+    mdotf(1,y) = (mdotc * cp * (T_o4 - T_o3(1,y)))/(delH);
+    P_o4(1,y) = P_o3(1,y);
+    f(1,y) = mdotf(1,y)/mdotc;
+    %Turbine
+    T_o5(1,y) = T_o4 - (T_o3(1,y) - T_o2); %- (C_w_p * T_a);
+    tow_t = T_o5(1,y)/T_o4;
+    P_o5(1,y) = P_o4(1,y) * (tow_t)^(gamma/(gamma-1));
+    %Nozzle
+    P_o8(1,y) = P_o5(1,y);
+    P_8 = P_a;
+    M_8(1,y) = sqrt((2/(gamma-1))*(((P_o8(1,y)/P_8)^((gamma-1)/(gamma))) - 1));
+    T_o8(1,y) = T_o5(1,y);
+    T_8(1,y) = T_o8(1,y)/(1 + (((gamma-1)/2)*(M_8(1,y))^2));
+    u_8(1,y) = M_8(1,y) * sqrt(gamma * R * T_8(1,y));
+    %Propeller
+    tow_5 = ((T_oa / T_a) * (tow_c) * (tow_t));
+    A = sqrt(((T_o4 / T_a) * (T_a / T_oa) * ((tow_5 - 1) / (tow_c))) / ((T_oa / T_a) - 1)) - 1;
+    C_w_j = (gamma - 1) * (M_a)^2 * A;
+    C_w_e = C_w_p + C_w_j;
+    %Thrust Power
+    Thrust_Power(1,y) = C_w_e * mdotc * cp * T_a;
+    %Thrust
+    F_t(1,y) = Thrust_Power(1,y)/u_a;
+    %SFC
+    SFC(1,y) = mdotf(1,y)/Thrust_Power(1,y);
+    %TSFC
+    TSFC(1,y) = mdotf(1,y)/F_t(1,y);
+    %Thermal efficiency
+    mdot_e = mdotc + mdotf;
+    Thermal_eff(1,y) = (((mdot_e/2)*(u_8(1,y))^2) - ((mdotc/2)*(u_a)^2))/(mdotf * delH);
+    %Propulsive efficiency
+    Propulsive_eff(1,y) = 2/(1 + (u_8(1,y)/u_a));
+    %Overall efficiency
+    Overall_eff(1,y) = Thermal_eff(1,y)*Propulsive_eff(1,y);
+    y = y+1;
+end
+Thermal_eff;
+Propulsive_eff;
+Overall_eff;
+
+plot(pi_c,TSFC,'LineWidth',2)
+xlabel('Compression Pressure Ratio (\pi_c)')
+ylabel('TSFC (kg/s.N)')
+title('TSFC vs \pi_c')
+grid on
+
+plot(pi_c,Thermal_eff, 'LineWidth',2)
+%xlabel('Compression Pressure Ratio (\pi_c)')
+hold on
+plot(pi_c,Propulsive_eff, 'LineWidth',2)
+%xlabel('Compression Pressure Ratio (\pi_c)')
+hold on
+plot(pi_c,Overall_eff, 'LineWidth',2)
+xlabel('Compression Pressure Ratio (\pi_c)')
+ylabel('Efficiency')
+grid on
+legend('Thermal efficiency','Propulsive efficiency','Overall efficiency')
+\end{lstlisting}
+
+\begin{center}
+{\bf References}
+\end{center}
+\begin{enumerate}
+    \item Flack, R. (2005). Fundamentals of Jet Propulsion with Applications (Cambridge Aerospace Series). Cambridge: Cambridge University Press. doi:10.1017/CBO9780511807138
+    \item Mattingly,Jack D..Elements of Gas Turbine Propulsion.United States,American Institute of Aeronautics and Astronautics,2005.
+    \item Farokhi,Saeed.Aircraft Propulsion.Germany,Wiley,2014.
+    \item Lec-31 Fundamentals of Aerospace Propulsion, \href{https://youtu.be/x7jw5cJWydY}.
+\end{enumerate}
+
+\end{document}
